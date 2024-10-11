@@ -1,122 +1,187 @@
-.bg-primary {
-    background-color: #bd5d38 !important;
+:root {
+    --bg-color: #f8f7f3; /* Cream background */
+    --text-color: #333333; /* Dark gray text */
+    --accent-color: #2c4a3e; /* Dark forest green accent */
+    --hover-color: #3e6859; /* Lighter forest green for hover */
 }
-.text-primary {
-    color: #bd5d38 !important;
-}
-a {
-    color: #bd5d38;
-}
-a:hover, a:focus, a:active {
-    color: #824027;
-}
+
 body {
-    font-family: 'Open Sans', serif;
-    padding-top: 54px;
-    color: #868e96;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s ease;
 }
-@media (min-width: 992px) {
-    body {
-        padding-top: 0;
-        padding-left: 17rem;
-   }
-}
+
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Saira Extra Condensed', serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #343a40;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: var(--text-color);
+    text-transform: none;
 }
+
 h1 {
-    font-size: 6rem;
-    line-height: 5.5rem;
-}
-h2 {
-    font-size: 3.5rem;
-}
-.subheading {
-    text-transform: uppercase;
-    font-weight: 500;
-    font-family: 'Saira Extra Condensed', serif;
-    font-size: 1.35rem;
-}
-.list-social-icons a {
-    color: #495057;
-}
-.list-social-icons a:hover {
-    color: #bd5d38;
-}
-.list-social-icons a .fa-lg {
-    font-size: 1.75rem;
-}
-.list-icons {
     font-size: 3rem;
+    line-height: 1.2;
 }
+
+h2 {
+    font-size: 2.25rem;
+}
+
+.subheading {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0.03em;
+}
+
+a {
+    color: var(--accent-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+a:hover, a:focus, a:active {
+    color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+.list-social-icons a {
+    color: var(--text-color);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.list-social-icons a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.list-icons {
+    font-size: 1.25rem;
+}
+
+.list-icons .list-inline-item i {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
 .list-icons .list-inline-item i:hover {
-    color: #bd5d38;
+    color: var(--accent-color);
+    transform: rotate(10deg);
 }
+
+#sideNav {
+    background-color: var(--bg-color);
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+#sideNav:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
 #sideNav .navbar-nav .nav-item .nav-link {
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0.03em;
+    transition: color 0.3s ease, padding-left 0.3s ease;
 }
+
+#sideNav .navbar-nav .nav-item .nav-link:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
 @media (min-width: 992px) {
     #sideNav {
-        text-align: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        width: 17rem;
-        height: 100vh;
-   }
-    #sideNav .navbar-brand {
-        display: flex;
-        margin: auto auto 0;
-        padding: 0.5rem;
-   }
+        width: 220px;
+    }
+
     #sideNav .navbar-brand .img-profile {
-        max-width: 10rem;
-        max-height: 10rem;
-        border: 0.5rem solid rgba(255, 255, 255, 0.2);
-   }
-    #sideNav .navbar-collapse {
-        display: flex;
-        align-items: flex-start;
-        flex-grow: 0;
-        width: 100%;
-        margin-bottom: auto;
-   }
-    #sideNav .navbar-collapse .navbar-nav {
-        flex-direction: column;
-        width: 100%;
-   }
-    #sideNav .navbar-collapse .navbar-nav .nav-item {
-        display: block;
-   }
-    #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
-        display: block;
-   }
+        max-width: 9rem;
+        max-height: 9rem;
+        border: none;
+        transition: transform 0.3s ease;
+    }
+
+    #sideNav .navbar-brand .img-profile:hover {
+        transform: scale(1.05);
+    }
+
+    body {
+        padding-left: 220px;
+    }
 }
+
 section.resume-section {
-    border-bottom: 1px solid #dee2e6;
-    padding-top: 5rem !important;
-    padding-bottom: 5rem !important;
+    border-bottom: 1px solid #e0e0e0;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+    transition: background-color 0.3s ease;
 }
-section.resume-section .resume-item .resume-date {
-    min-width: none;
+
+section.resume-section:hover {
+    background-color: rgba(0,0,0,0.02);
 }
+
 @media (min-width: 768px) {
     section.resume-section {
         min-height: 100vh;
-   }
-    section.resume-section .resume-item .resume-date {
-        min-width: 18rem;
-   }
+    }
 }
-@media (min-width: 992px) {
-    section.resume-section {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
-   }
+
+.bg-primary {
+    background-color: var(--accent-color) !important;
+}
+
+.text-primary {
+    color: var(--accent-color) !important;
+}
+
+/* Add smooth transitions */
+.resume-item, .subheading, .list-social-icons a, .list-icons .list-inline-item i {
+    transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.resume-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resume-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Modern, minimal styling for buttons and form elements */
+button, input[type="submit"] {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+input[type="text"], input[type="email"], textarea {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(44, 74, 62, 0.2);
 }
