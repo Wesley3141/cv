@@ -1,4 +1,67 @@
 <!DOCTYPE html>
+<script>
+  // Add smooth scrolling effect
+  document.addEventListener('DOMContentLoaded', function() {
+    const scrollLinks = document.querySelectorAll('a.js-scroll-trigger');
+    for (const link of scrollLinks) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        targetElement.style.opacity = '0';
+        targetElement.style.transition = 'opacity 1s ease-in-out';
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        setTimeout(() => {
+          targetElement.style.opacity = '1';
+        }, 300);
+      });
+    }
+  });
+
+  // Add fade-in effect for sections
+  window.addEventListener('load', function() {
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__animated', 'animate__fadeIn');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  });
+
+  // Add fade-in effect for the left column
+  window.addEventListener('load', function() {
+    const sideNav = document.getElementById('sideNav');
+    sideNav.style.opacity = '0';
+    sideNav.style.transition = 'opacity 9.5s ease-out';
+    setTimeout(() => {
+      sideNav.style.opacity = '1';
+    }, 100);
+  });
+
+  // Add drop shadow to the profile image
+  window.addEventListener('load', function() {
+    const profileImage = document.querySelector('.img-profile');
+    profileImage.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)';
+    profileImage.style.transition = 'box-shadow 0.3s ease-in-out';
+    
+    // Optional: Add hover effect
+    profileImage.addEventListener('mouseenter', function() {
+      this.style.boxShadow = '0 8px 16px 0 rgba(0, 0, 0, 0.3)';
+    });
+    profileImage.addEventListener('mouseleave', function() {
+      this.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)';
+    });
+  });
+</script>
 <html lang="en">
 
   <head>
@@ -94,18 +157,16 @@
           <h1 class="animate__animated animate__fadeIn mb-0 animate__delay-0.2s">Wesley
             <span class="animate__animated animate__fadeIn text-primary animate__delay-0.5s">Deklich</span>
           </h1>
-          <div class="subheading mb-5 animate__animated animate__fadeIn mb-0 animate__delay-0.3">Saratoga · California · (408) 647-0040 ·
+          <div class="subheading mb-5 animate__animated animate__fadeIn mb-0 animate__delay-0.3s">Saratoga · California · (408) 647-0040 ·
             <a href="mailto:contact@wesleydeklich.me">contact@wesleydeklich.me</a>
           </div>
           <p class="mb-5 animate__animated animate__fadeInDown animate__delay-0.8s "> 
-            Hi there! I'm <strong> Wesley Deklich</strong>, a rising freshman at the University of Illinois Urbana-Champaign.
+            I'm <strong>Wesley Deklich</strong>, a freshman at the University of Illinois Urbana-Champaign, pursuing a dual major in Computer Science and Economics. My academic journey is driven by a passion for leveraging technology to solve complex economic challenges.
 <br> <br>
-I've developed strong skills in data processing and analytics, which I believe will be valuable in both finance and computer science. I'm also highly skilled in product development and video design, which will allow me to approach these fields with a creative and innovative mindset.
+With a strong foundation in data processing and analytics, I am particularly interested in their applications at the intersection of finance and computer science. My skills in product development and design complement my technical abilities, allowing me to approach problems with both analytical rigor and creative innovation.
 <br> <br>
-Furthermore, I'm excited to explore the intersection of finance and computer science, which I believe will be a crucial area for growth and innovation in the coming years. By combining my skills in these two areas, I hope to be able to contribute to the development of cutting-edge technologies and financial strategies that can <strong>drive progress and change </strong>.
-          
-
-           
+I am deeply fascinated by machine learning research and its potential to revolutionize industries. My goal is to contribute to cutting-edge technologies that can <strong>drive progress in both the tech and financial sectors</strong>. I am eager to engage in ML research projects that have real-world implications, particularly in areas such as predictive analytics, algorithmic trading, and financial risk management.
+          </p>
           
 
           </p>
@@ -126,6 +187,14 @@ Furthermore, I'm excited to explore the intersection of finance and computer sci
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-circle fa-stack-2x"></i>
                   <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="animate__animated animate__flipInY delay-1s list-inline-item animate__delay-1s">
+              <a href="https://github.com/wesley3141" target="_blank">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
                 </span>
               </a>
             </li>
@@ -458,25 +527,35 @@ Furthermore, I'm excited to explore the intersection of finance and computer sci
           </li>
           <li class="list-inline-item">
             <i class="devicons devicons-wordpress"></i>
-            <li class="list-inline-item">
-              <i class="devicons devicons-c"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-photoshop"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="devicons devicons-illustrator"></i>
-            </li>
-           
-           
-
+          </li>
+          <li class="list-inline-item">
+            <i class="devicons devicons-c"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="devicons devicons-photoshop"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="devicons devicons-illustrator"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="devicons devicons-react"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="devicons devicons-nodejs"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="devicons devicons-mongodb"></i>
+          </li>
+          <li class="list-inline-item">
+            <i class="devicons devicons-npm"></i>
+          </li>
         </ul>
 
         <div class="subheading mb-3">Extra</div>
         <ul class="fa-ul mb-0">
           <li>
             <i class="fa-li fa fa-check"></i>
-           Responsive Design &amp; SEO</li>
+            Responsive Design &amp; SEO</li>
           <li>
             <i class="fa-li fa fa-check"></i>
             Adobe After Effects &amp; Premiere Pro</li>
@@ -486,9 +565,30 @@ Furthermore, I'm excited to explore the intersection of finance and computer sci
           <li>
             <i class="fa-li fa fa-check"></i>
             Advertising &amp; Marketing</li>
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              3D Design &amp; Post Production</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            3D Design &amp; Post Production</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            MERN Stack (MongoDB, Express.js, React, Node.js)</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            Full Stack Development</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            Python Data Visualization (Matplotlib, Seaborn)</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            Data Analysis with Pandas</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            RESTful API Development</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            Version Control (Git)</li>
+          <li>
+            <i class="fa-li fa fa-check"></i>
+            Agile Methodologies</li>
         </ul>
       </div>
     </section>
