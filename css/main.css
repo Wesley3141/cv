@@ -1,12 +1,17 @@
 :root {
-    --bg-color: #f8f7f3; /* Cream background */
-    --text-color: #333333; /* Dark gray text */
-    --accent-color: #2c4a3e; /* Dark forest green accent */
-    --hover-color: #3e6859; /* Lighter forest green for hover */
+    --bg-color: #ffffff; /* Clean white background */
+    --text-color: #1a1a1a; /* Almost black text */
+    --accent-color: #273655; /* Sleek dark blue */
+    --hover-color: #364b6e; /* Slightly lighter blue for hover */
+    --light-gray: #f8f9fa; /* Light gray for sections */
+    --border-color: #e9ecef; /* Light gray for borders */
+}
+
+body, h1, h2, h3, h4, h5, h6, .subheading, button, input, textarea, .nav-link {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -14,8 +19,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--text-color);
     text-transform: none;
 }
@@ -30,31 +34,29 @@ h2 {
 }
 
 .subheading {
-    font-family: 'Inter', sans-serif;
     font-size: 1rem;
     font-weight: 300;
     text-transform: none;
     letter-spacing: 0.03em;
+    color: var(--hover-color);
 }
 
 a {
     color: var(--accent-color);
-    transition: color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-a:hover, a:focus, a:active {
+a:hover {
     color: var(--hover-color);
-    transform: translateY(-2px);
 }
 
 .list-social-icons a {
-    color: var(--text-color);
-    transition: color 0.3s ease, transform 0.3s ease;
+    color: var(--accent-color);
 }
 
 .list-social-icons a:hover {
-    color: var(--accent-color);
-    transform: scale(1.1);
+    color: var(--hover-color);
 }
 
 .list-icons {
@@ -72,7 +74,7 @@ a:hover, a:focus, a:active {
 
 #sideNav {
     background-color: var(--bg-color);
-    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
     transition: box-shadow 0.3s ease;
 }
 
@@ -81,15 +83,12 @@ a:hover, a:focus, a:active {
 }
 
 #sideNav .navbar-nav .nav-item .nav-link {
-    font-weight: 300;
-    text-transform: none;
-    letter-spacing: 0.03em;
-    transition: color 0.3s ease, padding-left 0.3s ease;
+    font-weight: 400;
+    color: var(--text-color);
 }
 
 #sideNav .navbar-nav .nav-item .nav-link:hover {
     color: var(--accent-color);
-    padding-left: 5px;
 }
 
 @media (min-width: 992px) {
@@ -114,14 +113,14 @@ a:hover, a:focus, a:active {
 }
 
 section.resume-section {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--border-color);
     padding-top: 3rem !important;
     padding-bottom: 3rem !important;
     transition: background-color 0.3s ease;
 }
 
 section.resume-section:hover {
-    background-color: rgba(0,0,0,0.02);
+    background-color: var(--light-gray);
 }
 
 @media (min-width: 768px) {
@@ -146,22 +145,24 @@ section.resume-section:hover {
 /* Hover effects */
 .resume-item {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem;
+    border-radius: 4px;
 }
 
 .resume-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-left: 3px solid var(--accent-color);
+    background-color: var(--light-gray);
 }
 
 /* Modern, minimal styling for buttons and form elements */
 button, input[type="submit"] {
     background-color: var(--accent-color);
-    color: var(--bg-color);
+    color: white;
     border: none;
-    padding: 10px 20px;
-    font-family: 'Inter', sans-serif;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
     font-size: 0.9rem;
-    font-weight: 300;
+    font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -174,7 +175,6 @@ button:hover, input[type="submit"]:hover {
 input[type="text"], input[type="email"], textarea {
     border: 1px solid #e0e0e0;
     padding: 10px;
-    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     font-weight: 300;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -182,6 +182,190 @@ input[type="text"], input[type="email"], textarea {
 
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border-color: var(--accent-color);
-    outline: none;
-    box-shadow: 0 0 5px rgba(44, 74, 62, 0.2);
+    box-shadow: 0 0 5px rgba(39, 54, 85, 0.2);
+}
+
+/* Update profile image styling */
+.img-profile {
+    border: 2px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.img-profile:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Update button styling */
+button, .btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+/* Add new styles for the main section */
+#about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Name styling */
+#about h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    color: var(--text-color);
+    animation: none; /* Remove fade animation */
+    opacity: 1; /* Keep fully visible */
+    transform: none; /* Remove transform */
+}
+
+#about h1 .text-primary {
+    color: var(--accent-color) !important;
+    transition: color 0.3s ease;
+}
+
+#about h1 .text-primary:hover {
+    color: var(--hover-color) !important;
+}
+
+/* Subtitle styling - keep the subtle animation for this */
+#about .subheading {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeUpIn 0.6s ease forwards 0.1s;
+}
+
+/* Main text content */
+#about p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpIn 0.8s ease forwards 0.4s;
+}
+
+/* Social icons container */
+.list-social-icons {
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpIn 0.8s ease forwards 0.6s;
+}
+
+/* Individual social icons */
+.list-social-icons .list-inline-item {
+    margin-right: 1.5rem;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.list-social-icons .list-inline-item:hover {
+    transform: scale(1.1);
+}
+
+/* Floating background elements */
+.background-element {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--accent-color);
+    opacity: 0.02;
+    z-index: -1;
+}
+
+.element-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+    animation: float 20s infinite ease-in-out;
+}
+
+.element-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -50px;
+    animation: float 15s infinite ease-in-out reverse;
+}
+
+/* Animations */
+@keyframes fadeUpIn {
+    from {
+        opacity: 0.5;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(15px, -15px);
+    }
+    50% {
+        transform: translate(0, -30px);
+    }
+    75% {
+        transform: translate(-15px, -15px);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #about {
+        padding: 2rem;
+    }
+    
+    #about h1 {
+        font-size: 3rem;
+    }
+    
+    #about p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Remove the gradient overlay from sections */
+.resume-section::before {
+    display: none; /* Remove the gradient overlay */
+}
+
+/* Make floating elements more subtle */
+.background-element {
+    opacity: 0.02;
+}
+
+/* Adjust spacing for better visual hierarchy */
+#about .my-auto {
+    margin-top: -2rem;
 }
