@@ -1,0 +1,491 @@
+/*
+  Wesley Deklich — single editorial column.
+  No mono, no section numbers, no scaffolding. Sans-serif throughout.
+  One axis. Three tones. Type and air do the work.
+*/
+
+:root {
+  --bg: #f7f6f4;
+  --primary: #111111;
+  --secondary: #4a4a4a;
+  --muted: #777777;
+  --hairline: #e8e5df;
+  --accent: #1a3d7c;
+  --accent-soft: rgba(26, 61, 124, 0.16);
+
+  --measure: 36rem;
+  --gutter: clamp(1.5rem, 5vw, 3rem);
+  --rail-gap: clamp(2.5rem, 6vw, 4.5rem);
+  --portrait: 2.25rem;
+
+  --rhythm-section: clamp(3rem, 5.5vw, 4.5rem);
+  --rhythm-section-major: clamp(4.25rem, 7vw, 6rem);
+  --rhythm-entry: 2rem;
+
+  --ease: cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+body {
+  margin: 0;
+  font-family:
+    'Inter Tight',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  color: var(--secondary);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  opacity: 0;
+  animation: enter 700ms var(--ease) 50ms forwards;
+}
+
+@keyframes enter {
+  to {
+    opacity: 1;
+  }
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--primary);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+  transition:
+    border-color 220ms var(--ease),
+    color 220ms var(--ease);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  outline: none;
+}
+
+/* —————————————————————————————————————————
+   Page shell — one column, indented from a quiet rail.
+   Asymmetric: rail floats left, content occupies the dominant measure.
+   ————————————————————————————————————————— */
+
+.page {
+  position: relative;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: clamp(2.75rem, 6vw, 4.75rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: clamp(2.25rem, 4vw, 3rem);
+}
+
+@media (min-width: 880px) {
+  .page {
+    grid-template-columns: 7rem minmax(0, var(--measure));
+    column-gap: var(--rail-gap);
+    padding-left: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .masthead,
+  main,
+  .contact {
+    grid-column: 2;
+  }
+
+  .rail {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+  }
+}
+
+/* —————————————————————————————————————————
+   Masthead — strict left axis under the name.
+   Photo and name share one line; everything else aligns to the name.
+   ————————————————————————————————————————— */
+
+.masthead {
+  max-width: var(--measure);
+  display: grid;
+  row-gap: 1.5rem;
+}
+
+.masthead-id {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.portrait {
+  width: var(--portrait);
+  height: var(--portrait);
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  filter: grayscale(0.05);
+}
+
+h1 {
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.thesis {
+  margin: 0;
+  font-size: clamp(1.1875rem, 1.9vw, 1.4375rem);
+  font-weight: 450;
+  line-height: 1.45;
+  letter-spacing: -0.018em;
+  color: var(--primary);
+  max-width: 32rem;
+}
+
+.thesis a {
+  color: var(--primary);
+  border-bottom-color: var(--accent-soft);
+}
+
+.thesis a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.standfirst {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 32rem;
+}
+
+/* —————————————————————————————————————————
+   Rail — quiet, sits to the left, never speaks above the content.
+   ————————————————————————————————————————— */
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.rail a {
+  color: var(--muted);
+  border-bottom: none;
+  width: max-content;
+  transition: color 220ms var(--ease);
+}
+
+.rail a:hover,
+.rail a:focus-visible {
+  color: var(--primary);
+}
+
+@media (min-width: 880px) {
+  .rail {
+    position: sticky;
+    top: clamp(2.75rem, 6vw, 4.75rem);
+    align-self: start;
+    padding-top: 0.4rem;
+  }
+}
+
+@media (max-width: 879px) {
+  .rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 1.25rem;
+    row-gap: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+/* —————————————————————————————————————————
+   Main column — sections separated by air, not lines.
+   ————————————————————————————————————————— */
+
+main {
+  max-width: var(--measure);
+  display: grid;
+  row-gap: var(--rhythm-section);
+}
+
+/* Conceptual shift between "Now" and the body of work below. */
+section#experience {
+  margin-top: calc(var(--rhythm-section-major) - var(--rhythm-section));
+}
+
+section {
+  display: grid;
+  row-gap: 1.35rem;
+}
+
+section h2 {
+  margin: 0;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Identity mark — one accent dot beside "Now". The page's only colored element. */
+section#now h2::before {
+  content: '';
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+
+/* "Now" lede — slightly larger, primary-tone paragraph. */
+section#now > p:first-of-type {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.012em;
+  color: var(--primary);
+}
+
+section#now .aside {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+/* —————————————————————————————————————————
+   Entries — narrative, not resume-row.
+     "Org — Role"
+     date
+     paragraph
+   ————————————————————————————————————————— */
+
+section .entry {
+  display: grid;
+  row-gap: 0.25rem;
+  margin: 0;
+}
+
+section .entry + .entry {
+  margin-top: calc(var(--rhythm-entry) - 1.35rem);
+}
+
+.entry > header {
+  display: grid;
+  row-gap: 0.05rem;
+}
+
+.entry-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--primary);
+  line-height: 1.45;
+}
+
+.entry-title a {
+  color: var(--primary);
+  border-bottom-color: var(--accent-soft);
+}
+
+.entry-title .role-detail {
+  color: var(--secondary);
+  font-weight: 400;
+}
+
+.entry-when {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+
+.entry > p {
+  margin: 0.55rem 0 0;
+  font-size: 0.96875rem;
+  line-height: 1.7;
+  letter-spacing: -0.008em;
+  color: var(--secondary);
+  max-width: var(--measure);
+}
+
+/* —————————————————————————————————————————
+   Archive — folded by default. Same language as the rest, just opt-in.
+   ————————————————————————————————————————— */
+
+section.archive {
+  row-gap: 0;
+}
+
+section.archive details {
+  margin: 0;
+}
+
+section.archive summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+  width: max-content;
+  transition: color 220ms var(--ease);
+}
+
+section.archive summary::-webkit-details-marker {
+  display: none;
+}
+
+section.archive summary::after {
+  content: '+';
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--muted);
+  transition: color 220ms var(--ease);
+}
+
+section.archive details[open] summary::after {
+  content: '\2212';
+}
+
+section.archive summary:hover,
+section.archive summary:focus-visible {
+  color: var(--primary);
+  outline: none;
+}
+
+section.archive summary:hover::after,
+section.archive summary:focus-visible::after {
+  color: var(--primary);
+}
+
+.archive-body {
+  margin-top: 1.75rem;
+  display: grid;
+  row-gap: 1.5rem;
+}
+
+.archive-intro {
+  margin: 0 0 0.5rem;
+  font-size: 0.96875rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.archive-body .entry + .entry {
+  margin-top: 0;
+}
+
+.archive-body .entry > p {
+  font-size: 0.9375rem;
+  color: var(--secondary);
+  line-height: 1.7;
+}
+
+/* —————————————————————————————————————————
+   Contact — one quiet line.
+   ————————————————————————————————————————— */
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 1.75rem;
+  margin: 0;
+  padding-top: clamp(1.75rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--hairline);
+  font-size: 0.875rem;
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.contact a {
+  color: var(--secondary);
+  border-bottom: none;
+  transition: color 220ms var(--ease);
+}
+
+.contact a:hover,
+.contact a:focus-visible {
+  color: var(--accent);
+}
+
+/* —————————————————————————————————————————
+   Small viewports — collapse the rail above content; let the column breathe.
+   ————————————————————————————————————————— */
+
+@media (max-width: 879px) {
+  .page {
+    grid-template-areas:
+      'masthead'
+      'rail'
+      'main'
+      'contact';
+    row-gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  .masthead {
+    grid-area: masthead;
+  }
+
+  .rail {
+    grid-area: rail;
+  }
+
+  main {
+    grid-area: main;
+  }
+
+  .contact {
+    grid-area: contact;
+  }
+}

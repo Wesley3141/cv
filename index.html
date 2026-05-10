@@ -1,412 +1,266 @@
 <!DOCTYPE html>
-<script>
-  // Add smooth scrolling effect
-  document.addEventListener('DOMContentLoaded', function() {
-    const scrollLinks = document.querySelectorAll('a.js-scroll-trigger');
-    for (const link of scrollLinks) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        targetElement.style.opacity = '0';
-        targetElement.style.transition = 'opacity 1s ease-in-out';
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-        setTimeout(() => {
-          targetElement.style.opacity = '1';
-        }, 300);
-      });
-    }
-  });
-
-  // Add fade-in effect for sections
-  window.addEventListener('load', function() {
-    const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate__animated', 'animate__fadeIn');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
-  });
-
-  // Add fade-in effect for the left column
-  window.addEventListener('load', function() {
-    const sideNav = document.getElementById('sideNav');
-    sideNav.style.opacity = '0';
-    sideNav.style.transition = 'opacity 9.5s ease-out';
-    setTimeout(() => {
-      sideNav.style.opacity = '1';
-    }, 100);
-  });
-
-  // Add drop shadow to the profile image
-  window.addEventListener('load', function() {
-    const profileImage = document.querySelector('.img-profile');
-    profileImage.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)';
-    profileImage.style.transition = 'box-shadow 0.3s ease-in-out';
-    
-    // Optional: Add hover effect
-    profileImage.addEventListener('mouseenter', function() {
-      this.style.boxShadow = '0 8px 16px 0 rgba(0, 0, 0, 0.3)';
-    });
-    profileImage.addEventListener('mouseleave', function() {
-      this.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)';
-    });
-  });
-</script>
 <html lang="en">
 
-  <head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Wesley Deklich — researcher at SSAIL / UIUC, compute infrastructure at Meta. Multivector retrieval systems and efficient large-scale ML.">
+  <meta name="author" content="Wesley Deklich">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" type="image/png" href="img/3.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;450;500;600&display=swap"
+    rel="stylesheet">
+  <title>Wesley Deklich</title>
+  <link href="css/site.css" rel="stylesheet">
+</head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Rising junior passionate about entrepreneurship, engineering, and finance. ">
-    <meta name="author" content="Wesley Deklich">
-    <link rel="shortcut icon" type="img/png" href="img/3.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link href="dist/pattern.min.css" rel="stylesheet">
-    <meta name="keywords" content="Wesley Deklich">
-    <meta name="author" content="Wesley, Deklich, Wesley Deklich">
-    <title>Wesley Deklich</title>
+<body>
+  <div class="page content">
 
-<!--- LOADER  -->
-
-
-
-
-
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="vendor/devicons/css/devicons.min.css" rel="stylesheet">
-    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css rel="stylesheet"> 
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet" /> 
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
-    
-
-
-  
-    <link href="css/resume.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-
-  </head>
-
-  <body id="page-top">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top" id="sideNav">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Home</span>
-        <span class="d-none d-lg-block">
-          <img class="animate__animated animate__fadeInLeft img-fluid img-profile rounded-circle mx-auto mb-2 border-0" src="img/profile.png" alt="">
-        </span>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger animate__animated animate__flipInX animate__delay-0.3s" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger animate__animated animate__flipInX animate__delay-0.3s" href="#experience">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger animate__animated animate__flipInX animate__delay-0.3s" href="#education">Education</a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger animate__animated animate__flipInX animate__delay-0.3s" href="#interests">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger animate__animated animate__flipInX animate__delay-0.3s" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item2">
-          <!---   <a class="nav-link js-scroll-trigge" href="WesleyDeklich.pdf" target="_blank">   CV  </a>  --->
-
-            <a class=" nav-link js-scroll-trigge animate__animated animate__flipInX animate__delay-0.3s" href="WesleyDeklich.pdf" target="_blank"> CV </a>
-           
-            
-          </li>
-          </li>
-        </ul>
+    <header class="masthead">
+      <div class="masthead-id">
+        <img class="portrait" src="img/profile.png" alt="">
+        <h1>Wesley Deklich</h1>
       </div>
+
+      <p class="thesis">
+        Engineer on compute infrastructure at <a href="https://about.meta.com/" rel="noopener">Meta</a>.
+        Researching multivector retrieval systems and efficient large-scale ML at
+        <a href="https://supercomputing-system-ai-lab.github.io/">SSAIL</a>
+        with <a href="https://minjiazhang.github.io/">Minjia Zhang</a>.
+      </p>
+    </header>
+
+    <nav class="rail" aria-label="Sections">
+      <a href="#now">Now</a>
+      <a href="#experience">Experience</a>
+      <a href="#research">Research</a>
+      <a href="#education">Education</a>
+      <a href="#selected-work">Work</a>
+      <a href="#archive">Archive</a>
+      <a href="WesleyDeklich.pdf">CV</a>
     </nav>
 
-    <div class="container-fluid p-0">
+    <main>
 
-      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-        <!-- Add background elements -->
-        <div class="background-element element-1"></div>
-        <div class="background-element element-2"></div>
-        
-        <div class="my-auto">
-          <h1 class="mb-0">Wesley
-            <span class="text-primary">Deklich</span>
-          </h1>
-          <div class="subheading mb-5">
-            Saratoga · California · (408) 647-0040 ·
-            <a href="mailto:contact@wesleydeklich.me">contact@wesleydeklich.me</a>
-          </div>
-          <p class="mb-5"> 
-            I'm <strong>Wesley Deklich</strong>, a sophomore at the University of Illinois Urbana-Champaign, pursuing a major in Computer Science + Economics with a statistics minor. My academic journey is driven by a passion for leveraging artificial intelligence and machine learning to solve complex real-world challenges.
-            <br> <br>
-            With a strong foundation in AI/ML research and engineering, I specialize in natural language processing, neural search systems, and large-scale data analysis. My experience spans from implementing cutting-edge RAG pipelines and ontology-driven search to developing production-ready machine learning systems that serve millions of users.
-            <br> <br>
-            I am deeply fascinated by the intersection of <strong>AI research and practical engineering</strong>, focusing on optimizing model performance, building scalable ML infrastructure, and advancing the state-of-the-art in natural language understanding and information retrieval systems.
-          </p>
-          
-          <ul class="list-inline list-social-icons mb-0">
-            <li class="list-inline-item">
-              <a href="https://www.linkedin.com/in/wesleydeklich/" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://medium.com/@wesleydeklich" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://github.com/wesley3141" target="_blank">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <section id="now">
+        <h2>Now</h2>
+        <p>
+          A first-author manuscript on multivector retrieval is under review at NeurIPS.
+        </p>
+        <p class="aside">
+          Adjacent threads: training and inference efficiency, systems for experimentation, and the
+          geometry of representation in retrieval-augmented settings.
+        </p>
       </section>
 
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
-        <div class="my-auto">
+      <section id="experience">
+        <h2>Selected experience</h2>
 
-          <h2 class="mb-5">Experience</h2>
+        <article class="entry">
+          <header>
+            <p class="entry-title">
+              <a href="https://about.meta.com/" rel="noopener">Meta</a> &mdash;
+              <span class="role-detail">Software Engineer, Compute Infrastructure</span>
+            </p>
+            <p class="entry-when">Present</p>
+          </header>
+          <p>Infrastructure for large-scale computation and experimentation.</p>
+        </article>
 
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">AI/ML Engineer Intern</h3>
-              <div class="subheading mb-3">Aisera</div>
+        <article class="entry">
+          <header>
+            <p class="entry-title">
+              <a href="https://aisera.com/" rel="noopener">Aisera</a> &mdash;
+              <span class="role-detail">AI / ML Engineer Intern</span>
+            </p>
+            <p class="entry-when">Summer 2025</p>
+          </header>
+          <p>
+            Ontology-aware neural search for retrieval-augmented systems; clustering and embedding
+            pipelines; FAISS-style index tuning for semantic search.
+          </p>
+        </article>
+      </section>
+
+      <section id="research">
+        <h2>Research</h2>
+
+        <article class="entry">
+          <header>
+            <p class="entry-title">
+              <a href="https://supercomputing-system-ai-lab.github.io/">SSAIL, University of Illinois</a> &mdash;
+              <span class="role-detail">with <a href="https://minjiazhang.github.io/">Minjia Zhang</a></span>
+            </p>
+            <p class="entry-when">Ongoing</p>
+          </header>
+          <p>
+            Multivector architectures and the systems infrastructure required to operate them reliably at
+            scale. First-author manuscript under review at NeurIPS.
+          </p>
+        </article>
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+
+        <article class="entry">
+          <header>
+            <p class="entry-title">
+              <a href="https://illinois.edu/" rel="noopener">University of Illinois Urbana-Champaign</a> &mdash;
+              <span class="role-detail">B.S. Computer Science &amp; Economics</span>
+            </p>
+            <p class="entry-when">2024 — 2027</p>
+          </header>
+          <p>Statistics minor.</p>
+        </article>
+      </section>
+
+      <section id="selected-work">
+        <h2>Selected work</h2>
+
+        <article class="entry">
+          <header>
+            <p class="entry-title">
+              <a href="https://github.com/Wesley3141/Meteorite_Identification" rel="noopener">Meteorite classification</a> &mdash;
+              <span class="role-detail">PyTorch, TensorRT</span>
+            </p>
+            <p class="entry-when">2023</p>
+          </header>
+          <p>CNN-based classification with edge-oriented inference for geospatial imagery.</p>
+        </article>
+
+        <article class="entry">
+          <header>
+            <p class="entry-title">
+              Aegis Notes &mdash;
+              <span class="role-detail">Electron, TypeScript</span>
+            </p>
+            <p class="entry-when">2024</p>
+          </header>
+          <p>Cross-platform notes with markdown editing and Electron IPC persistence.</p>
+        </article>
+
+        <article class="entry">
+          <header>
+            <p class="entry-title">
+              Investor sentiment &mdash;
+              <span class="role-detail">FastAPI, MongoDB</span>
+            </p>
+            <p class="entry-when">2023</p>
+          </header>
+          <p>NLP pipelines and storage for unstructured text and dashboards.</p>
+        </article>
+      </section>
+
+      <section id="archive" class="archive">
+        <details>
+          <summary>Archive</summary>
+          <div class="archive-body">
+            <p class="archive-intro">
+              Earlier roles and side projects. Accurate, but ancillary to the work above.
+            </p>
+
+            <article class="entry">
+              <header>
+                <p class="entry-title">
+                  <a href="https://www.csr.utexas.edu/education-outreach/high-school-internships/sees" rel="noopener">STEM
+                    Enhancement in Earth Science (SEES)</a> &mdash;
+                  <span class="role-detail">Research Intern, UT Austin Center for Space Research</span>
+                </p>
+                <p class="entry-when">2022</p>
+              </header>
               <p>
-                &#8594; Implemented <strong>ontology-driven neural search for RAG pipelines</strong> by integrating structured entity hierarchies with dense embeddings from sentence-transformers, increasing query matching accuracy by <strong>18%</strong> in internal benchmarks <br>
-                &#8594; Developed <strong>unsupervised clustering workflows using HAC, UMAP, and HDBSCAN</strong> to organize large-scale enterprise knowledge base entries, improving retrieval precision by <strong>22%</strong> and reducing noise in results <br>
-                &#8594; Optimized <strong>FAISS ANN indices (IVF-PQ, HNSW)</strong> for low-latency, high-recall semantic search on multi-million vector datasets, cutting average retrieval time from <strong>120ms to 45ms</strong> without loss in recall <br>
+                Bayesian classification and pairing guidelines for meteorite catalog data; analysis of
+                10k+ historical records in Python, TensorFlow, NumPy. Pairing framework based on physical
+                attributes, geography, and orbital history. Related work presented at the AGU Fall Meeting.
               </p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">June 2025 - August 2025</span>
-            </div>
-          </div>
+            </article>
 
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Research Intern</h3>
-              <div class="subheading mb-3">NASA SEES @ UT Austin</div>
+            <article class="entry">
+              <header>
+                <p class="entry-title">
+                  <a href="https://www.ringcentral.com/" rel="noopener">RingCentral</a> &mdash;
+                  <span class="role-detail">Software Engineering Intern</span>
+                </p>
+                <p class="entry-when">2022</p>
+              </header>
               <p>
-                &#8594; Identified critical flaws in <strong>Bayesian Classification algorithms</strong> and meteorite pairing guidelines by analyzing <strong>10,000+ historical data points</strong> using Python, TensorFlow, and NumPy, improving model precision by <strong>15%</strong> <br>
-                &#8594; Developed a new <strong>meteorite pairing framework</strong> based on physical attributes, geographic proximity, and orbital history, increasing classification accuracy by <strong>20%</strong> across 5,000+ samples <br>
-                &#8594; Presented findings at <strong>AGU Fall Meeting</strong>, engaging over <strong>25,000 attendees globally</strong> via a live presentation and Q&A <br>
+                Cloud communication and video services. Latency-oriented analysis in Python and Tableau,
+                D3 / Tableau dashboards.
               </p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">May 2022 - October 2022</span>
-            </div>
-          </div>
+            </article>
 
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Software Engineering Intern</h3>
-              <div class="subheading mb-3">RingCentral</div>
+            <article class="entry">
+              <header>
+                <p class="entry-title">Aisera <span class="role-detail">— extended notes</span></p>
+              </header>
               <p>
-                &#8594; Worked closely with a team to design and implement <strong>cloud-based communication solutions</strong> by optimizing server architecture and enhancing data compression, significantly improving video services for over <strong>1M global users</strong> <br>
-                &#8594; Assisted in analyzing <strong>real-time video usage data</strong> using Python and Tableau, successfully identifying key areas of improvement to reduce video latency, and streamlined the data processing workflow <br>
-                &#8594; Leveraged <strong>Tableau and D3.js</strong> to design dynamic, scalable, and interactive visualizations, incorporating real-time data updates and intuitive UI/UX principles, which boosted total user engagement by <strong>20%</strong> <br>
+                Ontology-driven neural search for retrieval-augmented systems with structured entity hierarchies
+                and dense embeddings. Unsupervised clustering with HAC, UMAP, HDBSCAN to organize enterprise
+                knowledge bases. FAISS ANN indices (IVF-PQ, HNSW) for low-latency search over multi-million-vector
+                corpora.
               </p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">October 2022 - December 2022</span>
-            </div>
-          </div>
-          
-        </div>
-      </section>
+            </article>
 
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
-        <div class="my-auto">
-          <h2 class="mb-5">Education</h2>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">University of Illinois Urbana-Champaign</h3>
-              <div class="subheading mb-3">Bachelor of Science in Computer Science and Economics</div>
-              <div>Relevant Courses: Data Structures & Algorithms, Discrete Structures, Linear Algebra, Statistics & Probability</div>
-              <p>GPA: 4.0</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">August 2024 - May 2027</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="projects">
-        <div class="my-auto">
-
-          <h2 class="mb-5">Projects</h2>
-      
-          <h3>Investor Analysis Dashboard</h3>
-          <div class="subheading mb-3">FastAPI, MongoDB, NLP, Sentiment Analysis</div>
-          <p class="mb-0">
-            &#8594; Developed and integrated a <strong>Natural Language Processing (NLP) pipeline</strong> using Python libraries such as NLTK and SpaCy to analyze investor sentiment from unstructured text data, enabling real-time sentiment visualization <br>
-            &#8594; Worked closely with the database team to design a <strong>MongoDB schema</strong> for efficient data storage and retrieval, optimizing overall performance for handling over <strong>500,000 data points</strong> effectively <br>
-            &#8594; Integrated <strong>Axios for seamless API communication</strong>, ensuring a <strong>99.9% uptime</strong> and reducing data retrieval time by <strong>30%</strong>, while handling over 10,000 API requests daily with optimized response times <br>
-          </p>
-
-          <h3><br>Aegis Notes App</h3>
-          <div class="subheading mb-3">Electron, TypeScript, Tailwind, Jotai, Node.js, TensorFlow</div>
-          <p class="mb-0">
-            &#8594; Developed a <strong>cross-platform note-taking app</strong> using Electron and TypeScript, implementing state management with Jotai and optimizing build processes for seamless deployment across <strong>Windows, macOS, and Linux</strong> <br>
-            &#8594; Engineered core functionalities including a <strong>Markdown editor with real-time preview</strong> and data persistence through Electron's IPC, enabling reliable and user-friendly note-taking capabilities <br>
-            &#8594; Integrated <strong>TensorFlow.js to develop a smart recommendation system</strong> that suggests relevant tags, categories, and even related notes, improving user productivity, organization, and content discovery <br>
-          </p>
-
-          <h3><br><a href="https://github.com/Wesley3141/Meteorite_Identification" target="_blank">Meteorite Classification System</a></h3>
-          <div class="subheading mb-3">PyTorch, Computer Vision, TensorRT</div>
-          <p class="mb-0"> 
-            &#8594; Developed an <strong>AI-based classification model</strong> to distinguish between meteorites, craters, and ordinary landscapes using <strong>computer vision techniques</strong> and convolutional neural networks <br>
-            &#8594; Leveraged <strong>TensorRT & PyTorch</strong> to optimize real-time inference for deployment on <strong>NVIDIA Jetson Nano</strong> and other edge computing hardware <br>
-            &#8594; Implemented a <strong>convolutional neural network (CNN)</strong> trained on high-resolution geospatial imagery to identify key morphological differences between meteorites and terrain <br>
-            &#8594; Designed an <strong>automated drone-based scanning system</strong>, enabling researchers to survey large areas efficiently and detect potential meteorite sites <br>
-          </p>
-
-      </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="skills">
-        <div class="w-100">
-            <h2 class="mb-5">Technical Skills</h2>
-
-            <div class="subheading mb-3">Programming Languages</div>
-            <ul class="fa-ul mb-0">
-                <li><i class="fa-li fa fa-check"></i><b>Core Languages:</b> Python, Java, C/C++, SQL (Postgres), JavaScript, TypeScript, R, HTML/CSS</li>
-            </ul>
-
-            <div class="subheading mb-3">Machine Learning & AI</div>
-            <ul class="fa-ul mb-0">
-                <li><i class="fa-li fa fa-check"></i><b>Deep Learning Frameworks:</b> PyTorch, TensorFlow, scikit-learn, Hugging Face Transformers</li>
-                <li><i class="fa-li fa fa-check"></i><b>Natural Language Processing:</b> spaCy, NLTK, Sentence Transformers, Named Entity Recognition (NER), Sentiment Analysis</li>
-                <li><i class="fa-li fa fa-check"></i><b>Search & Retrieval:</b> FAISS, Vector Databases, RAG Pipelines, Semantic Search, Information Retrieval</li>
-                <li><i class="fa-li fa fa-check"></i><b>Clustering & Dimensionality Reduction:</b> UMAP, HDBSCAN, HAC, t-SNE, PCA</li>
-                <li><i class="fa-li fa fa-check"></i><b>Computer Vision:</b> OpenCV, Image Classification, Object Detection, TensorRT Optimization</li>
-                <li><i class="fa-li fa fa-check"></i><b>Model Optimization:</b> Quantization, Pruning, Knowledge Distillation, Edge Deployment</li>
-            </ul>
-
-            <div class="subheading mb-3">Frameworks & Development Tools</div>
-            <ul class="fa-ul mb-0">
-                <li><i class="fa-li fa fa-check"></i><b>Backend Frameworks:</b> Flask, FastAPI, Node.js, Express.js</li>
-                <li><i class="fa-li fa fa-check"></i><b>Frontend & Desktop:</b> React, Electron, Tailwind CSS, Material-UI</li>
-                <li><i class="fa-li fa fa-check"></i><b>Developer Tools:</b> Git, Docker, TravisCI, Visual Studio, PyCharm, Postman</li>
-                <li><i class="fa-li fa fa-check"></i><b>Databases:</b> MongoDB, PostgreSQL, Vector Databases</li>
-                <li><i class="fa-li fa fa-check"></i><b>Cloud Platforms:</b> Google Cloud Platform, AWS (EC2, S3), Model Serving</li>
-            </ul>
-
-            <div class="subheading mb-3">Additional Skills</div>
-            <ul class="fa-ul mb-0">
-                <li><i class="fa-li fa fa-check"></i><b>Specializations:</b> Natural Language Processing, Model Optimization, Data Visualization, API Development</li>
-                <li><i class="fa-li fa fa-check"></i><b>Research:</b> Algorithm Development, Performance Benchmarking, Technical Writing</li>
-            </ul>
-        </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="additional">
-        <div class="my-auto">
-
-          <h2 class="mb-5">Additional Experience & Projects</h2>
-      
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">UPenn Wharton Program</h3>
-              <div class="subheading mb-3">University of Pennsylvania Wharton</div>
+            <article class="entry">
+              <header>
+                <p class="entry-title">
+                  Investor analysis dashboard &mdash;
+                  <span class="role-detail">FastAPI, MongoDB, NLP</span>
+                </p>
+              </header>
               <p>
-                &#8594; Immersed in hands-on experiences, lectures, and company visits across Silicon Valley <br>
-                &#8594; Generated a new business idea and assessed its profit potential, built innovative business models, and iterated toward product-market fit <br>
-                &#8594; Presented "Tessero" in front of Wharton faculty, alumni, and successful entrepreneurs <br>
-                &#8594; Won first place overall, nominated "Most likely to be the next Steve Jobs" <br>
+                NLTK and spaCy over investor-facing text; MongoDB schema scaled to hundreds of thousands of rows.
+                Dashboard-facing API tuned for high read volume.
               </p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">June 2023</span>
-            </div>
+            </article>
+
+            <article class="entry">
+              <header>
+                <p class="entry-title">
+                  Aegis Notes &mdash;
+                  <span class="role-detail">Electron, TypeScript, Tailwind, Jotai, TensorFlow.js</span>
+                </p>
+              </header>
+              <p>
+                Markdown editor with preview; persistence via Electron IPC across platforms. Lightweight tagging
+                and similarity hooks with TensorFlow.js.
+              </p>
+            </article>
+
+            <article class="entry">
+              <header>
+                <p class="entry-title">Other <span class="role-detail">— smaller projects and writing</span></p>
+              </header>
+              <p>
+                UPenn Wharton program (2023). Founded
+                <a href="https://marineturtlefoundation.com/" rel="noopener">Marine Turtle Foundation</a>, a
+                nonprofit. Built
+                <a href="https://everythingkindle.online/" rel="noopener">Everything Kindle</a>, a small
+                resale workflow. Earlier writing on
+                <a href="https://wesleydeklich.medium.com/inequalities-in-education-75e78231a325" rel="noopener">education
+                  inequality</a>.
+              </p>
+            </article>
           </div>
-
-          <h3><a href="https://marineturtlefoundation.com/" target="_blank">Marine Turtle Foundation</a></h3>
-          <p class="mb-0">
-            &#8594; Founded a <strong>nonprofit organization</strong> by filing LLC status forms and bylaws, aimed at monitoring sea turtle birth nests, tracking migration patterns, and organizing large-scale beach cleanup initiatives <br>
-            &#8594; Successfully raised <strong>$13,000+ in donations</strong>, allocating funds to large conservation groups and aquariums to support preservation efforts <br>
-            &#8594; Developed the foundation's website using <strong>HTML5 and SCSS</strong>, optimizing it for mobile responsiveness and accessibility <br>
-          </p>
-
-          <h3><br><a href="https://everythingkindle.online/" target="_blank">Everything Kindle</a></h3>
-          <p class="mb-0">
-            &#8594; Established a Kindle reselling business leveraging <strong>Amazon FBA (Fulfillment by Amazon)</strong>, handling logistics, inventory management, and automated order fulfillment <br>
-            &#8594; Developed a full-stack web application for Kindle sales using HTML, CSS, JavaScript, and Swift, integrating real-time price tracking APIs to optimize sales strategies <br>
-          </p>
-
-          <h3><br><a href="exotictoken.space" target="_blank">Exotic Token</a></h3>
-          <p class="mb-0">
-            &#8594; Developed an enterprise-grade fintech platform to facilitate secure decentralized transactions <br>
-            &#8594; Designed and deployed a <strong>Polygon (ERC20) blockchain-based token</strong>, ensuring compliance with smart contract best practices using Solidity <br>
-            &#8594; Integrated with UniSwap (decentralized exchange) to enable token liquidity and peer-to-peer transactions <br>
-          </p>
-
-          <h3><br><a href="https://wesleydeklich.medium.com/inequalities-in-education-75e78231a325" target="_blank">Education Inequality Research</a></h3>
-          <p class="mb-0">
-            &#8594; Conducted data-driven research on educational inequalities in low-income communities by analyzing student performance metrics and resource allocation disparities <br>
-            &#8594; Published findings on <strong>ERIC.GOV (2021)</strong>, contributing to ongoing educational policy discussions <br>
-          </p>
-
-      </div>
+        </details>
       </section>
-    </div>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </main>
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <footer class="contact">
+      <a href="mailto:contact@wesleydeklich.me">contact@wesleydeklich.me</a>
+      <a href="https://www.linkedin.com/in/wesleydeklich/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/wesley3141" target="_blank" rel="noopener">GitHub</a>
+      <a href="WesleyDeklich.pdf">CV</a>
+    </footer>
 
-    <!-- Custom scripts for this template -->
-    <script src="js/resume.min.js"></script>
-
-  </body>
+  </div>
+</body>
 
 </html>
