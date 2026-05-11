@@ -79,6 +79,18 @@
       font-size: 0.82rem;
     }
 
+    .slots {
+      display: inline-flex;
+      gap: 0.35rem;
+      align-items: center;
+    }
+
+    .slots-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-right: 0.2rem;
+    }
+
     .settings {
       position: relative;
     }
@@ -165,6 +177,12 @@
     <div class="controls">
       <button id="regularTab" class="active" type="button">Regular</button>
       <button id="codeTab" type="button">Code</button>
+      <div class="slots" role="group" aria-label="Note slot">
+        <span class="slots-label">Note</span>
+        <button class="slot-btn active" data-slot="1" type="button">1</button>
+        <button class="slot-btn" data-slot="2" type="button">2</button>
+        <button class="slot-btn" data-slot="3" type="button">3</button>
+      </div>
       <div class="settings">
         <button id="settingsBtn" type="button" aria-haspopup="true" aria-expanded="false">Settings</button>
         <div id="settingsPanel" class="settings-panel" role="dialog" aria-label="Notes settings">
@@ -198,9 +216,8 @@
   <script>
     (function () {
       var KEYS = {
-        regular: "wd_notes_regular_v1",
-        code: "wd_notes_code_v1",
         tab: "wd_notes_tab_v1",
+        slot: "wd_notes_slot_v1",
         regularFontSize: "wd_notes_regular_font_size_v1",
         regularLineHeight: "wd_notes_regular_line_height_v1"
       };
@@ -215,13 +232,36 @@
       var settingsPanel = document.getElementById("settingsPanel");
       var fontSizeSelect = document.getElementById("fontSizeSelect");
       var lineHeightSelect = document.getElementById("lineHeightSelect");
+      var slotButtons = document.querySelectorAll(".slot-btn");
       var active = localStorage.getItem(KEYS.tab) || "regular";
+      var activeSlot = localStorage.getItem(KEYS.slot) || "1";
       var saveTimer;
 
-      regularEditor.value = localStorage.getItem(KEYS.regular) || "";
-      codeEditor.value = localStorage.getItem(KEYS.code) || "";
       fontSizeSelect.value = localStorage.getItem(KEYS.regularFontSize) || "0.95rem";
       lineHeightSelect.value = localStorage.getItem(KEYS.regularLineHeight) || "1.6";
+
+      function keyFor(type, slot) {
+        return "wd_notes_" + type + "_slot_" + slot + "_v1";
+      }
+
+      function loadSlot(slot) {
+        regularEditor.value = localStorage.getItem(keyFor("regular", slot)) || "";
+        codeEditor.value = localStorage.getItem(keyFor("code", slot)) || "";
+
+        /* One-time migrate from pre-slot storage keys → slot 1 */
+        if (slot === "1" && regularEditor.value === "" && codeEditor.value === "") {
+          var legacyR = localStorage.getItem("wd_notes_regular_v1");
+          var legacyC = localStorage.getItem("wd_notes_code_v1");
+          if (legacyR !== null) localStorage.setItem(keyFor("regular", "1"), legacyR);
+          if (legacyC !== null) localStorage.setItem(keyFor("code", "1"), legacyC);
+          regularEditor.value = localStorage.getItem(keyFor("regular", slot)) || "";
+          codeEditor.value = localStorage.getItem(keyFor("code", slot)) || "";
+        }
+
+        slotButtons.forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.slot === slot);
+        });
+      }
 
       function applyRegularEditorStyles() {
         regularEditor.style.fontSize = fontSizeSelect.value;
@@ -245,8 +285,8 @@
       }
 
       function saveNow() {
-        localStorage.setItem(KEYS.regular, regularEditor.value);
-        localStorage.setItem(KEYS.code, codeEditor.value);
+        localStorage.setItem(keyFor("regular", activeSlot), regularEditor.value);
+        localStorage.setItem(keyFor("code", activeSlot), codeEditor.value);
         setStatus("Saved");
       }
 
@@ -261,6 +301,16 @@
 
       regularTab.addEventListener("click", function () { showTab("regular"); });
       codeTab.addEventListener("click", function () { showTab("code"); });
+      slotButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var nextSlot = button.dataset.slot;
+          if (nextSlot === activeSlot) return;
+          saveNow();
+          activeSlot = nextSlot;
+          localStorage.setItem(KEYS.slot, activeSlot);
+          loadSlot(activeSlot);
+        });
+      });
 
       settingsBtn.addEventListener("click", function () {
         var isOpen = settingsPanel.classList.toggle("open");
@@ -355,6 +405,7 @@
 
       window.addEventListener("beforeunload", saveNow);
       applyRegularEditorStyles();
+      loadSlot(activeSlot);
       showTab(active);
       setStatus("Saved");
     })();
