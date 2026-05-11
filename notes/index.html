@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes</title>
+  <style>
+    :root {
+      --bg: #f7f6f4;
+      --text: #111111;
+      --muted: #777777;
+      --line: #e8e5df;
+      --accent: #1a3d7c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem 1rem 3rem;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 550;
+      letter-spacing: -0.01em;
+    }
+
+    .sub {
+      margin: 0.4rem 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+      align-items: center;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 0.86rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .status {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .settings {
+      position: relative;
+    }
+
+    .settings-panel {
+      position: absolute;
+      top: calc(100% + 0.45rem);
+      left: 0;
+      z-index: 5;
+      min-width: 200px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.65rem;
+      display: none;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .settings-panel.open {
+      display: block;
+    }
+
+    .settings-row {
+      display: grid;
+      gap: 0.35rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .settings-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .settings-row label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .settings-row select {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0.3rem 0.35rem;
+      font: inherit;
+      font-size: 0.86rem;
+      background: #fff;
+      color: var(--text);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 70vh;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.85rem 0.95rem;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--accent);
+    }
+
+    #codeEditor {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      tab-size: 2;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Notes</h1>
+      <p class="sub">Local-only notes. Saved automatically in this browser.</p>
+    </header>
+
+    <div class="controls">
+      <button id="regularTab" class="active" type="button">Regular</button>
+      <button id="codeTab" type="button">Code</button>
+      <div class="settings">
+        <button id="settingsBtn" type="button" aria-haspopup="true" aria-expanded="false">Settings</button>
+        <div id="settingsPanel" class="settings-panel" role="dialog" aria-label="Notes settings">
+          <div class="settings-row">
+            <label for="fontSizeSelect">Regular note font size</label>
+            <select id="fontSizeSelect">
+              <option value="0.9rem">Small</option>
+              <option value="0.95rem">Default</option>
+              <option value="1rem">Large</option>
+              <option value="1.05rem">X-Large</option>
+            </select>
+          </div>
+          <div class="settings-row">
+            <label for="lineHeightSelect">Regular note line height</label>
+            <select id="lineHeightSelect">
+              <option value="1.5">Compact</option>
+              <option value="1.6">Default</option>
+              <option value="1.75">Comfortable</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button id="clearBtn" type="button">Clear current</button>
+      <span id="status" class="status">Saved</span>
+    </div>
+
+    <textarea id="regularEditor" placeholder="Write regular notes..."></textarea>
+    <textarea id="codeEditor" placeholder="Write code notes..."></textarea>
+  </div>
+
+  <script>
+    (function () {
+      var KEYS = {
+        regular: "wd_notes_regular_v1",
+        code: "wd_notes_code_v1",
+        tab: "wd_notes_tab_v1",
+        regularFontSize: "wd_notes_regular_font_size_v1",
+        regularLineHeight: "wd_notes_regular_line_height_v1"
+      };
+
+      var regularTab = document.getElementById("regularTab");
+      var codeTab = document.getElementById("codeTab");
+      var regularEditor = document.getElementById("regularEditor");
+      var codeEditor = document.getElementById("codeEditor");
+      var clearBtn = document.getElementById("clearBtn");
+      var status = document.getElementById("status");
+      var settingsBtn = document.getElementById("settingsBtn");
+      var settingsPanel = document.getElementById("settingsPanel");
+      var fontSizeSelect = document.getElementById("fontSizeSelect");
+      var lineHeightSelect = document.getElementById("lineHeightSelect");
+      var active = localStorage.getItem(KEYS.tab) || "regular";
+      var saveTimer;
+
+      regularEditor.value = localStorage.getItem(KEYS.regular) || "";
+      codeEditor.value = localStorage.getItem(KEYS.code) || "";
+      fontSizeSelect.value = localStorage.getItem(KEYS.regularFontSize) || "0.95rem";
+      lineHeightSelect.value = localStorage.getItem(KEYS.regularLineHeight) || "1.6";
+
+      function applyRegularEditorStyles() {
+        regularEditor.style.fontSize = fontSizeSelect.value;
+        regularEditor.style.lineHeight = lineHeightSelect.value;
+      }
+
+      function setStatus(text) {
+        status.textContent = text;
+      }
+
+      function showTab(next) {
+        active = next;
+        localStorage.setItem(KEYS.tab, active);
+
+        var isRegular = active === "regular";
+        regularTab.classList.toggle("active", isRegular);
+        codeTab.classList.toggle("active", !isRegular);
+        regularEditor.style.display = isRegular ? "block" : "none";
+        codeEditor.style.display = isRegular ? "none" : "block";
+        (isRegular ? regularEditor : codeEditor).focus();
+      }
+
+      function saveNow() {
+        localStorage.setItem(KEYS.regular, regularEditor.value);
+        localStorage.setItem(KEYS.code, codeEditor.value);
+        setStatus("Saved");
+      }
+
+      function queueSave() {
+        setStatus("Saving...");
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(saveNow, 200);
+      }
+
+      regularEditor.addEventListener("input", queueSave);
+      codeEditor.addEventListener("input", queueSave);
+
+      regularTab.addEventListener("click", function () { showTab("regular"); });
+      codeTab.addEventListener("click", function () { showTab("code"); });
+
+      settingsBtn.addEventListener("click", function () {
+        var isOpen = settingsPanel.classList.toggle("open");
+        settingsBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!settingsPanel.contains(event.target) && event.target !== settingsBtn) {
+          settingsPanel.classList.remove("open");
+          settingsBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      fontSizeSelect.addEventListener("change", function () {
+        localStorage.setItem(KEYS.regularFontSize, fontSizeSelect.value);
+        applyRegularEditorStyles();
+      });
+
+      lineHeightSelect.addEventListener("change", function () {
+        localStorage.setItem(KEYS.regularLineHeight, lineHeightSelect.value);
+        applyRegularEditorStyles();
+      });
+
+      function indentSelection(textarea, unindent) {
+        var value = textarea.value;
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+        var lineStart = value.lastIndexOf("\n", start - 1) + 1;
+        var lineEnd = value.indexOf("\n", end);
+        if (lineEnd === -1) lineEnd = value.length;
+        var selected = value.slice(lineStart, lineEnd);
+        var lines = selected.split("\n");
+        var updated;
+
+        if (unindent) {
+          updated = lines.map(function (line) {
+            if (line.startsWith("  ")) return line.slice(2);
+            if (line.startsWith("\t")) return line.slice(1);
+            if (line.startsWith(" ")) return line.slice(1);
+            return line;
+          }).join("\n");
+        } else {
+          updated = lines.map(function (line) { return "  " + line; }).join("\n");
+        }
+
+        textarea.value = value.slice(0, lineStart) + updated + value.slice(lineEnd);
+        textarea.selectionStart = lineStart;
+        textarea.selectionEnd = lineStart + updated.length;
+        queueSave();
+      }
+
+      codeEditor.addEventListener("keydown", function (event) {
+        if (event.key !== "Tab") return;
+        event.preventDefault();
+
+        var hasSelection = codeEditor.selectionStart !== codeEditor.selectionEnd;
+        if (hasSelection) {
+          indentSelection(codeEditor, event.shiftKey);
+          return;
+        }
+
+        var start = codeEditor.selectionStart;
+        var end = codeEditor.selectionEnd;
+        var value = codeEditor.value;
+        var indent = event.shiftKey ? "" : "  ";
+
+        if (event.shiftKey) {
+          var before = value.slice(0, start);
+          if (before.endsWith("  ")) {
+            codeEditor.value = value.slice(0, start - 2) + value.slice(end);
+            codeEditor.selectionStart = start - 2;
+            codeEditor.selectionEnd = start - 2;
+            queueSave();
+          }
+          return;
+        }
+
+        codeEditor.value = value.slice(0, start) + indent + value.slice(end);
+        codeEditor.selectionStart = start + indent.length;
+        codeEditor.selectionEnd = start + indent.length;
+        queueSave();
+      });
+
+      clearBtn.addEventListener("click", function () {
+        var editor = active === "regular" ? regularEditor : codeEditor;
+        if (!window.confirm("Clear the current note?")) {
+          return;
+        }
+        editor.value = "";
+        queueSave();
+      });
+
+      window.addEventListener("beforeunload", saveNow);
+      applyRegularEditorStyles();
+      showTab(active);
+      setStatus("Saved");
+    })();
+  </script>
+</body>
+
+</html>
